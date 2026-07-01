@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>NSDL Kit Order - Registration Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #cacedb;
+            padding: 20px;
+        }
+        
+        .container {
+            position: relative;
+            max-width: 950px;
+            width: 100%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 15px;
+            background-color: #ffffff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* ========= BANNER WRAPPER - LEFT CAROUSEL (3 IMAGES) + RIGHT TEXT ========= */
+        .banner-wrapper {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        /* LEFT SIDE - CAROUSEL (3 IMAGES) */
+        .banner-carousel {
+            position: relative;
+            width: 380px;
+            height: 260px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .carousel-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+            background-color: #ffffff;
+        }
+        
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        /* Carousel dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .dot.active {
+            background-color: #0a5c8e;
+            transform: scale(1.2);
+        }
+        
+        /* RIGHT SIDE - TEXT CONTENT */
+        .banner-text {
+            flex: 1;
+            padding: 10px 5px;
+        }
+        
+        .banner-text h2 {
+            font-size: 1.6rem;
+            color: #0a5c8e;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .banner-text h3 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .banner-text .offer-list {
+            list-style: none;
+            margin: 12px 0;
+        }
+        
+        .banner-text .offer-list li {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .banner-text .offer-list li i {
+            color: #0a5c8e;
+            font-size: 1rem;
+        }
+        
+        .banner-text .highlight {
+            background: linear-gradient(135deg, #e8f0fe, #d4e2f7);
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #0a5c8e;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 700px) {
+            .banner-wrapper {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .banner-carousel {
+                width: 100%;
+                max-width: 360px;
+                height: 240px;
+            }
+            .banner-text .offer-list li {
+                justify-content: center;
+            }
+            .banner-text h2 {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-carousel {
+                height: 210px;
+            }
+        }
+        
+        /* Rest of original form styles */
+        .container header {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .container header::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            height: 3px;
+            width: 27px;
+            border-radius: 8px;
+            background-color: #a2b1da;
+        }
+        
+        .container form {
+            position: relative;
+            margin-top: 16px;
+            min-height: 290px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        
+        .container form .form {
+            position: absolute;
+            background-color: #fff;
+            transition: 0.3s ease;
+            width: 100%;
+        }
+        
+        .container form .form.second {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%);
+        }
+        
+        form.secActive .form.second {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+        
+        form.secActive .form.first {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
+        
+        .container form .title {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 6px 0;
+            color: #333;
+        }
+        
+        .container form .fields {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        form .fields .input-field {
+            display: flex;
+            width: calc(100% / 3 - 15px);
+            flex-direction: column;
+            margin: 4px 0;
+        }
+        
+        .input-field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2e2e2e;
+        }
+        
+        .input-field input, select {
+            outline: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 42px;
+            margin: 8px 0;
+        }
+        
+        .input-field input:focus,
+        .input-field select:focus {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+        }
+        
+        .input-field select,
+        .input-field input[type="date"] {
+            color: #707070;
+        }
+        
+        .input-field input[type="date"]:valid {
+            color: #333;
+        }
+        
+        .container form button, .backBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            max-width: 200px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            margin: 25px 0;
+            background-color: #0a5c8e;
+            transition: all 0.3s linear;
+            cursor: pointer;
+        }
+        
+        .container form .btnText {
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        form button:hover {
+            background-color: #084a72;
+        }
+        
+        form .backBtn:hover {
+            background-color: #5a6e8f;
+        }
+        
+        form button i,
+        form .backBtn i {
+            margin: 0 6px;
+        }
+        
+        form .backBtn i {
+            transform: rotate(180deg);
+        }
+        
+        form .buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        form .buttons button, .backBtn {
+            margin-right: 14px;
+        }
+        
+        @media (max-width: 750px) {
+            .container form {
+                overflow-y: scroll;
+            }
+            .container form::-webkit-scrollbar {
+                display: none;
+            }
+            form .fields .input-field {
+                width: calc(100% / 2 - 15px);
+            }
+        }
+        
+        @media (max-width: 550px) {
+            form .fields .input-field {
+                width: 100%;
+            }
+        }
+        
+        #thankYouMessage {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4BB543;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 16px;
+            z-index: 999;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- BANNER SECTION: 3 IMAGES CAROUSEL + RIGHT SIDE TEXT -->
+    <div class="banner-wrapper">
+        <!-- LEFT SIDE - Carousel with 3 Images -->
+        <div class="banner-carousel" id="bannerCarousel">
+            <div class="carousel-slides" id="carouselSlides">
+                <div class="slide">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiDDIuG3WuI50DQZEqXn7n78Un0sSciDRhCv1ieXikCAxyM72nKGHbXyWbXRUaCMWqY7f0i9dJ7ddX3mWAqAfCWAAR1DGVBYQifcNoQfZ_stPSTS7ycWfFmFtqgIk1UL7koHm0If0YgedZgum9MxvJwD_JMFXvCGCAZ8japHVie-3OIfMvdVxS8PfWjb6c/s320/Untitled%20design%20(2).png" 
+                         alt="NSDL Card Image 1">
+                </div>
+                <div class="slide">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhr6UoFPP-wDasOhtsNlQXmhnoNlq5vZcHlva77uNg84E3NMyl-7drAo68KtQ1O0Os9LrDzhttxXBnP3Jty9ZXkHrtl3mynGBSZo6Z7ktA0nxXouUz3QuacJy1Aozni987gaK1g7im3B9briQ-tYfF_1h0K7IUxtIPmpV0uv82CINqDwbprF84Kx3lpI_vJ/s320/Untitled%20design%20(1).png" 
+                         alt="NSDL Card Image 2">
+                </div>
+                <div class="slide">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_WbGyEY5ntpoAbTTiGjesb_PbU97e7yJtlD6oXzg7jJWnmRw6uYcoL4FvG200JHmG6ni3Ma9_Y1j2Mj4PlhuOcTtkcyrQZrHpOUGL_doi2o-e_imzeUMjYPLQQuWcTWDVkTgk73honbcE-PzQ7DyZa2v9uMODiGGy4vXpDnbSwTzdUpCbGePbd_jyvS-w/s320/Untitled%20design.png" 
+                         alt="NSDL Kit Order Image 3">
+                </div>
+            </div>
+            <div class="carousel-dots" id="carouselDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE - Text Content -->
+        <div class="banner-text">
+            <h2></h2>
+            <h3>NSDL Payments Bank -Insta KIT 10 Pcs</h3>
+            <ul class="offer-list">
+                <li><i class="uil uil-check-circle"></i> Payment bank - Insta Kit</li>
+                <li><i class="uil uil-check-circle"></i> Special Kit Order Offer</li>
+                <li><i class="uil uil-check-circle"></i> Limited Period Discount</li>
+                <li><i class="uil uil-check-circle"></i> ₹3500 <s>₹4000</s></li>
+            </ul>
+            <div class="highlight">
+                <i class="uil uil-tag"></i>Quickly fill from
+            </div>
+        </div>
+    </div>
+
+    <header>NSDL Kit Order - </header>
+
+    <form id="registrationForm">
+        <div class="form first">
+            <div class="details personal">
+                <span class="title">Personal Details</span>
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" name="entry.444521084" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Email</label>
+                        <input type="email" name="entry.2002149202" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Mobile Number</label>
+                        <input type="tel" name="entry.1638787499" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Full address with pin code</label>
+                        <input type="text" name="entry.372448824" placeholder="Enter your Full address with pin code" required>
+                    </div>
+                    <div class="input-field">
+                        <label>State</label>
+                        <input type="text" name="entry.1449527177" placeholder="Enter your quantity" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Select Date</label>
+                        <input type="date" name="entry.363502443" required>
+                    </div>
+                </div>
+            </div>
+            <button class="nextBtn" type="button">
+                <span class="btnText">Next</span>
+                <i class="uil uil-navigator"></i>
+            </button>
+            <div class="details ID"></div>
+        </div>
+
+        <div class="form second">
+            <div class="details address">
+                <span class="title">Kit Order Quantity </span>
+                <div class="fields">
+                    <div class="input-field">
+                        <label>-</label>
+                        <input type="text" name="entry.1853775471" placeholder="Enter quantity or details" required>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="backBtn" role="button">
+                        <i class="uil uil-navigator"></i>
+                        <span class="btnText">Back</span>
+                    </div>
+                    <button class="sumbit" type="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="thankYouMessage">
+    "Thank you for your order! Your request has been successfully received, and your tracking ID will be shared with you shortly." ✅
+</div>
+
+<script>
+    // ---------------- 3 IMAGES CAROUSEL (NO ARROWS, ONLY DOTS) ----------------
+    const slidesContainer = document.getElementById('carouselSlides');
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    const totalSlides = slides.length;  // Ab 3 slides hain
+    let autoInterval;
+
+    function updateCarousel(index) {
+        if (!slidesContainer) return;
+        if (index >= totalSlides) currentIndex = 0;
+        if (index < 0) currentIndex = totalSlides - 1;
+        const offset = -currentIndex * 100;
+        slidesContainer.style.transform = `translateX(${offset}%)`;
+        dots.forEach((dot, i) => {
+            if (i === currentIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function nextSlide() {
+        currentIndex++;
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        updateCarousel(currentIndex);
+        resetAutoScroll();
+    }
+
+    function resetAutoScroll() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => {
+            nextSlide();
+        }, 4000);
+    }
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+            currentIndex = idx;
+            updateCarousel(currentIndex);
+            resetAutoScroll();
+        });
+    });
+
+    if (totalSlides > 1) {
+        resetAutoScroll();
+    }
+    updateCarousel(0);
+
+    const carouselEl = document.getElementById('bannerCarousel');
+    if (carouselEl) {
+        carouselEl.addEventListener('mouseenter', () => {
+            if (autoInterval) clearInterval(autoInterval);
+        });
+        carouselEl.addEventListener('mouseleave', () => {
+            resetAutoScroll();
+        });
+    }
+
+    // ------------------- FORM SUBMISSION LOGIC (Google Forms) -------------------
+    const form = document.getElementById("registrationForm");
+    const nextBtnForm = document.querySelector(".nextBtn");
+    const backBtnForm = document.querySelector(".backBtn");
+    const thankYouMessage = document.getElementById("thankYouMessage");
+    const gformUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdXSMxIh1ZjfetXSDrrP3KidLNUGcKQS6eKsxKWgCWzqMdcOQ/formResponse";
+
+    if (nextBtnForm) {
+        nextBtnForm.addEventListener("click", (e) => {
+            e.preventDefault();
+            const allInputFirst = document.querySelectorAll(".form.first input");
+            let isFilled = true;
+            allInputFirst.forEach(input => {
+                if (input.value.trim() === "") {
+                    isFilled = false;
+                }
+            });
+            const emailField = document.querySelector(".form.first input[name='entry.2002149202']");
+            const mobileField = document.querySelector(".form.first input[name='entry.1638787499']");
+            if (emailField && emailField.value.trim() !== "") {
+                const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+                if (!emailPattern.test(emailField.value.trim())) {
+                    alert("Please enter a valid email address.");
+                    isFilled = false;
+                }
+            }
+            if (mobileField && mobileField.value.trim() !== "") {
+                const mobilePattern = /^[0-9]{10}$/;
+                const mobileVal = mobileField.value.trim();
+                if (!mobilePattern.test(mobileVal)) {
+                    alert("Please enter a valid 10-digit mobile number.");
+                    isFilled = false;
+                }
+            }
+            if (isFilled) {
+                form.classList.add('secActive');
+            } else {
+                alert("Please fill in all personal details correctly.");
+            }
+        });
+    }
+
+    if (backBtnForm) {
+        backBtnForm.addEventListener("click", (e) => {
+            e.preventDefault();
+            form.classList.remove('secActive');
+        });
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        
+        const secondPageQuantity = document.querySelector(".form.second input[name='entry.1853775471']");
+        if (secondPageQuantity && secondPageQuantity.value.trim() === "") {
+            alert("Please enter kit order quantity / marksheet details.");
+            return;
+        }
+        
+        const allFirstInputs = document.querySelectorAll(".form.first input");
+        let firstValid = true;
+        allFirstInputs.forEach(inp => {
+            if (inp.value.trim() === "") firstValid = false;
+        });
+        if (!firstValid) {
+            alert("Personal details incomplete. Please go back and fill all fields.");
+            form.classList.remove('secActive');
+            return;
+        }
+        
+        const formData = new FormData(form);
+        
+        fetch(gformUrl, {
+            method: "POST",
+            mode: "no-cors",
+            body: formData
+        }).then(() => {
+            thankYouMessage.style.display = "block";
+            setTimeout(() => {
+                thankYouMessage.style.display = "none";
+                form.reset();
+                form.classList.remove('secActive');
+                currentIndex = 0;
+                updateCarousel(0);
+                if (autoInterval) clearInterval(autoInterval);
+                resetAutoScroll();
+            }, 4000);
+        }).catch(err => {
+            console.error("Submission error:", err);
+            alert("Something went wrong. Please try again later.");
+        });
+    });
+</script>
+</body>
+</html>
